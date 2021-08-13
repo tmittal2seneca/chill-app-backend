@@ -37,12 +37,23 @@ public class MovieAndTVShowService {
         return tvShows;
     }
 
-    //get by title
-    public List<MovieAndTVShow> getByTitle(String title){
+    //get movies by title
+    public List<MovieAndTVShow> getMoviesByTitle(String title){
         Pattern titlePattern = Pattern.compile("(?i)^.*" + title.toLowerCase() + ".*$(?-i).*");
         Query query = new Query();
         //query.addCriteria(Criteria.where("name").is("true"));
-       query.addCriteria(Criteria.where("name").regex(titlePattern));
+       query.addCriteria(Criteria.where("name").regex(titlePattern)).
+       addCriteria(Criteria.where("isMovie").is(true));
+        List<MovieAndTVShow> movieAndTVShows = mongoTemplate.find(query, MovieAndTVShow.class);
+        return movieAndTVShows;
+    }
+
+    //get movies by title
+    public List<MovieAndTVShow> getTVShowsByTitle(String title){
+        Pattern titlePattern = Pattern.compile("(?i)^.*" + title.toLowerCase() + ".*$(?-i).*");
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").regex(titlePattern)).
+                addCriteria(Criteria.where("isMovie").is(false));
         List<MovieAndTVShow> movieAndTVShows = mongoTemplate.find(query, MovieAndTVShow.class);
         return movieAndTVShows;
     }
@@ -51,7 +62,8 @@ public class MovieAndTVShowService {
     public List<MovieAndTVShow> getFeaturedMovies(Boolean isFeatured){
         Query query = new Query();
         query.addCriteria(Criteria.where("isFeatured").is(isFeatured)).
-                addCriteria(Criteria.where("isMovie").is(true));
+                addCriteria(Criteria.where("isMovie").is(true)).
+                limit(6);
         List<MovieAndTVShow> featuredMovies = mongoTemplate.find(query, MovieAndTVShow.class);
         return featuredMovies;
     }
@@ -60,7 +72,8 @@ public class MovieAndTVShowService {
     public List<MovieAndTVShow> getFeaturedTVShows(Boolean isFeatured){
         Query query = new Query();
         query.addCriteria(Criteria.where("isFeatured").is(isFeatured)).
-                addCriteria(Criteria.where("isMovie").is(false));;
+                addCriteria(Criteria.where("isMovie").is(false)).
+                limit(6);
         List<MovieAndTVShow> featuredTVShows = mongoTemplate.find(query, MovieAndTVShow.class);
         return featuredTVShows;
     }

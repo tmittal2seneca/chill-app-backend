@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class MovieAndTVShowController {
 
@@ -34,13 +34,23 @@ public class MovieAndTVShowController {
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
-    //get based on title
-    @GetMapping("/movieandtvshows/title")
-    public ResponseEntity getByTitle(@RequestParam(value="titlename") String title)
+    //get movies based on title
+    @GetMapping("/movieandtvshows/fmovies")
+    public ResponseEntity getMoviesByTitle(@RequestParam(value="titlename") String title)
     {
         var customizedResponse = new CustomizedResponse
-                ("A list of all the Movie and TV shows based on title",
-                        service.getByTitle(title));
+                ("A list of all the Movies based on title",
+                        service.getMoviesByTitle(title));
+        return new ResponseEntity(customizedResponse, HttpStatus.OK);
+    }
+
+    //get tv shows based on title
+    @GetMapping("/movieandtvshows/ftvshows")
+    public ResponseEntity getTVShowsByTitle(@RequestParam(value="titlename") String title)
+    {
+        var customizedResponse = new CustomizedResponse
+                ("A list of all the TV Shows based on title",
+                        service.getTVShowsByTitle(title));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
