@@ -22,7 +22,7 @@ public class MovieAndTVShowController {
     @GetMapping("/movieandtvshows/movies")
     public ResponseEntity getAllMovies()
     {
-        var customizedResponse = new CustomizedResponse("A list of all the movies", service.getAllMovies());
+        CustomizedResponse customizedResponse = new CustomizedResponse("A list of all the movies", service.getAllMovies());
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
@@ -30,7 +30,7 @@ public class MovieAndTVShowController {
     @GetMapping("/movieandtvshows/tvshows")
     public ResponseEntity getAllTVShows()
     {
-        var customizedResponse = new CustomizedResponse("A list of all the TV shows", service.getAllTVShows());
+        CustomizedResponse customizedResponse = new CustomizedResponse("A list of all the TV shows", service.getAllTVShows());
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
@@ -38,7 +38,7 @@ public class MovieAndTVShowController {
     @GetMapping("/movieandtvshows/fmovies")
     public ResponseEntity getMoviesByTitle(@RequestParam(value="titlename") String title)
     {
-        var customizedResponse = new CustomizedResponse
+        CustomizedResponse customizedResponse = new CustomizedResponse
                 ("A list of all the Movies based on title",
                         service.getMoviesByTitle(title));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
@@ -48,7 +48,7 @@ public class MovieAndTVShowController {
     @GetMapping("/movieandtvshows/ftvshows")
     public ResponseEntity getTVShowsByTitle(@RequestParam(value="titlename") String title)
     {
-        var customizedResponse = new CustomizedResponse
+        CustomizedResponse customizedResponse = new CustomizedResponse
                 ("A list of all the TV Shows based on title",
                         service.getTVShowsByTitle(title));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
@@ -58,7 +58,7 @@ public class MovieAndTVShowController {
     @GetMapping("/movieandtvshows/featured-movies")
     public ResponseEntity getFeaturedMovies(@RequestParam(value="featured") Boolean isFeatured)
     {
-        var customizedResponse = new CustomizedResponse
+        CustomizedResponse customizedResponse = new CustomizedResponse
                 ("A list of all the featured movies",
                         service.getFeaturedMovies(isFeatured));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
@@ -68,7 +68,7 @@ public class MovieAndTVShowController {
     @GetMapping("/movieandtvshows/featured-tvshows")
     public ResponseEntity getFeaturedTVShows(@RequestParam(value="featured") Boolean isFeatured)
     {
-        var customizedResponse = new CustomizedResponse
+        CustomizedResponse customizedResponse = new CustomizedResponse
                 ("A list of all the featured TV shows",
                         service.getFeaturedTVShows(isFeatured));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);

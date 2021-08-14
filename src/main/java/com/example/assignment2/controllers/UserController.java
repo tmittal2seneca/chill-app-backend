@@ -21,7 +21,7 @@ public class UserController {
     @GetMapping("/user")
     public ResponseEntity getUsers()
     {
-        var response = new CustomizedResponse("A list of all users", service.getUsers());
+        CustomizedResponse response = new CustomizedResponse("A list of all users", service.getUsers());
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
